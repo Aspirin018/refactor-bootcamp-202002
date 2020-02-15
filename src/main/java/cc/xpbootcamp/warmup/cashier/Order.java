@@ -40,4 +40,10 @@ public class Order {
         }
         return result;
     }
+
+    public void printItems(StringBuilder output){
+        for(LineItem lineItem : getLineItems()){
+            lineItem.printItem(output);
+        }
+    }
 }

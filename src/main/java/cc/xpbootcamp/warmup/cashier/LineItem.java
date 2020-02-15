@@ -31,4 +31,15 @@ public class LineItem {
 	public double getItemSaleTax(){
 		return totalAmount() * .10;
 	}
+
+	public void printItem(StringBuilder output){
+		output.append(getDescription());
+		output.append('\t');
+		output.append(getPrice());
+		output.append('\t');
+		output.append(getQuantity());
+		output.append('\t');
+		output.append(totalAmount());
+		output.append('\n');
+	}
 }
