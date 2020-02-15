@@ -19,4 +19,11 @@ public class FibonacciCalculatorTest {
         Long result = fibonacciCalculator.calculate(2);
         assertEquals(Long.valueOf(1L), result);
     }
+
+    @Test
+    public void should_return_2_when_calculate_given_position_is_3(){
+        FibonacciCalculator fibonacciCalculator = new FibonacciCalculator();
+        Long result = fibonacciCalculator.calculate(3);
+        assertEquals(Long.valueOf(2L), result);
+    }
 }
