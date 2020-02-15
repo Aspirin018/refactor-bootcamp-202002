@@ -17,8 +17,7 @@ public class OrderReceipt {
     public String printReceipt() {
         StringBuilder output = new StringBuilder();
         output.append("======Printing Orders======\n");
-        output.append(order.getCustomerName());
-        output.append(order.getCustomerAddress());
+        order.printOrderInfo(output);
         order.printItems(output);
         output.append("Sales Tax").append('\t').append(order.getTotalSalesTax());
         output.append("Total Amount").append('\t').append(order.getTotalAmount());

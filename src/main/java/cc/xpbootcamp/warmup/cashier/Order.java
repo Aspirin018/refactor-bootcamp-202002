@@ -46,4 +46,9 @@ public class Order {
             lineItem.printItem(output);
         }
     }
+
+    public void printOrderInfo(StringBuilder output){
+        output.append(getCustomerName());
+        output.append(getCustomerAddress());
+    }
 }
