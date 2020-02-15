@@ -42,30 +42,10 @@ public class OrderReceipt {
         }
 
         // prints the state tax
-        output.append("Sales Tax").append('\t').append(getTotalSalesTax(order));
+        output.append("Sales Tax").append('\t').append(order.getTotalSalesTax());
 
         // print total amount
-        output.append("Total Amount").append('\t').append(getTotalAmount(order));
+        output.append("Total Amount").append('\t').append(order.getTotalAmount());
         return output.toString();
-    }
-
-    private double getItemSaleTax(LineItem alineItem){
-        return alineItem.totalAmount() * .10;
-    }
-
-    private double getTotalSalesTax(Order anOrder){
-        double result = 0d;
-        for(LineItem lineItem : order.getLineItems()) {
-            result += getItemSaleTax(lineItem);
-        }
-        return result;
-    }
-
-    private double getTotalAmount(Order anOrder){
-        double result = 0d;
-        for(LineItem lineItem : order.getLineItems()) {
-            result += lineItem.totalAmount() + getItemSaleTax(lineItem);
-        }
-        return result;
     }
 }
