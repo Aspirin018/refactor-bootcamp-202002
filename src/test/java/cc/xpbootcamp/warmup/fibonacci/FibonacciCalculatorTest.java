@@ -26,4 +26,11 @@ public class FibonacciCalculatorTest {
         Long result = fibonacciCalculator.calculate(3);
         assertEquals(Long.valueOf(2L), result);
     }
+
+    @Test
+    public void should_return_3_when_calculate_given_position_is_4(){
+        FibonacciCalculator fibonacciCalculator = new FibonacciCalculator();
+        Long result = fibonacciCalculator.calculate(4);
+        assertEquals(Long.valueOf(3L), result);
+    }
 }
