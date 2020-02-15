@@ -26,9 +26,6 @@ public class OrderReceipt {
         output.append(order.getCustomerAddress());
 //        output.append(order.getCustomerLoyaltyNumber());
 
-        // prints lineItems
-        double totSalesTx = 0d;
-        double tot = 0d;
         order.printItems(output);
 
         // prints the state tax
