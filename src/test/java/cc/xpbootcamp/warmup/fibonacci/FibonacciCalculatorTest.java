@@ -9,35 +9,34 @@ public class FibonacciCalculatorTest {
     @Test
     public void should_return_1_when_calculate_given_position_is_1(){
         FibonacciCalculator fibonacciCalculator = new FibonacciCalculator();
-        Long result = fibonacciCalculator.calculate(1);
-        assertEquals(Long.valueOf(1L), result);
+        long result = fibonacciCalculator.calculate(1);
+        assertEquals(1, result);
     }
 
     @Test
     public void should_return_1_when_calculate_given_position_is_2(){
         FibonacciCalculator fibonacciCalculator = new FibonacciCalculator();
-        Long result = fibonacciCalculator.calculate(2);
-        assertEquals(Long.valueOf(1L), result);
+        long result = fibonacciCalculator.calculate(2);
+        assertEquals(1, result);
     }
 
     @Test
     public void should_return_2_when_calculate_given_position_is_3(){
         FibonacciCalculator fibonacciCalculator = new FibonacciCalculator();
-        Long result = fibonacciCalculator.calculate(3);
-        assertEquals(Long.valueOf(2L), result);
+        long result = fibonacciCalculator.calculate(3);
+        assertEquals(2, result);
     }
 
-    @Test
-    public void should_return_3_when_calculate_given_position_is_4(){
+    @Test(expected = IllegalArgumentException.class)
+    public void should_throw_exception_when_calculate_given_position_is_0(){
         FibonacciCalculator fibonacciCalculator = new FibonacciCalculator();
-        Long result = fibonacciCalculator.calculate(4);
-        assertEquals(Long.valueOf(3L), result);
+        fibonacciCalculator.calculate(0);
+
     }
 
-    @Test
-    public void should_return_5_when_calculate_given_position_is_5(){
+    @Test(expected = IllegalArgumentException.class)
+    public void should_throw_exception_when_calculate_given_position_is_51(){
         FibonacciCalculator fibonacciCalculator = new FibonacciCalculator();
-        Long result = fibonacciCalculator.calculate(5);
-        assertEquals(Long.valueOf(5L), result);
+        fibonacciCalculator.calculate(51);
     }
 }
