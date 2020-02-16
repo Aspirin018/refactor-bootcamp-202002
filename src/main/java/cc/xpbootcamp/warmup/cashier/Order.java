@@ -13,19 +13,19 @@ public class Order {
         this.lineItemList = lineItemList;
     }
 
-    public String getCustomerName() {
+    String getCustomerName() {
         return cName;
     }
 
-    public String getCustomerAddress() {
+    String getCustomerAddress() {
         return addr;
     }
 
-    public List<LineItem> getLineItems() {
+    List<LineItem> getLineItems() {
         return lineItemList;
     }
 
-    public double getTotalSalesTax(){
+    double getTotalSalesTax(){
         double result = 0d;
         for(LineItem lineItem : getLineItems()) {
             result += lineItem.getItemSaleTax();
@@ -33,7 +33,7 @@ public class Order {
         return result;
     }
 
-    public double getTotalAmount(){
+    double getTotalAmount(){
         double result = 0d;
         for(LineItem lineItem : getLineItems()) {
             result += lineItem.totalAmount() + lineItem.getItemSaleTax();
@@ -41,13 +41,13 @@ public class Order {
         return result;
     }
 
-    public void printItems(StringBuilder output){
+    void printItems(StringBuilder output){
         for(LineItem lineItem : getLineItems()){
             lineItem.printItem(output);
         }
     }
 
-    public void printOrderInfo(StringBuilder output){
+    void printOrderInfo(StringBuilder output){
         output.append(getCustomerName());
         output.append(getCustomerAddress());
     }
