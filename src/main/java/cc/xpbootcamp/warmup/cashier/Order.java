@@ -36,19 +36,8 @@ public class Order {
     double getTotalAmount(){
         double result = 0d;
         for(LineItem lineItem : getLineItems()) {
-            result += lineItem.totalAmount() + lineItem.getItemSaleTax();
+            result += lineItem.amount() + lineItem.getItemSaleTax();
         }
         return result;
-    }
-
-    void printItems(StringBuilder output){
-        for(LineItem lineItem : getLineItems()){
-            lineItem.printItem(output);
-        }
-    }
-
-    void printOrderInfo(StringBuilder output){
-        output.append(getCustomerName());
-        output.append(getCustomerAddress());
     }
 }
