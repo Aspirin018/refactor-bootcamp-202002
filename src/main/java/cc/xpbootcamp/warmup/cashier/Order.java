@@ -3,6 +3,8 @@ package cc.xpbootcamp.warmup.cashier;
 import java.util.List;
 
 public class Order {
+    private static final String WEDNESDAY = "星期三";
+
     String cName;
     String addr;
     List<LineItem> lineItemList;
@@ -39,5 +41,12 @@ public class Order {
             result += lineItem.amount() + lineItem.getItemSaleTax();
         }
         return result;
+    }
+
+    double getDiscount(String weekDay){
+        if(WEDNESDAY.equals(weekDay)) {
+            return getTotalAmount() - getTotalAmount() * 0.98;
+        }
+        return 0d;
     }
 }
