@@ -53,22 +53,28 @@ public class OrderReceipt {
     }
 
     private String generateFooterLines() {
-        String result = TAX + setDecimal(order.getTotalSalesTax()) + "\n" +
-                getDiscountLine() +
-                TOTAL_AMOUNT + setDecimal(order.getTotalAmount());
-        return result;
+        return getTotalTaxLine() + "\n" +  getDiscountLine() + getTotalAmountLine() + "\n";
+    }
+
+    private String getTotalTaxLine(){
+        return TAX + setDecimal(order.getTotalSalesTax());
     }
 
     private String getDiscountLine(){
         double discount = order.getDiscount(getWeedDay());
-        return discount > 0 ? DISCOUNT + discount + "\n" : "";
+        return discount > 0 ? DISCOUNT + setDecimal(discount) + "\n" : "";
+    }
+
+    private String getTotalAmountLine(){
+        double discount = order.getDiscount(getWeedDay());
+        return discount > 0 ? TOTAL_AMOUNT + setDecimal(order.getTotalAmount() - discount) : setDecimal(order.getTotalAmount());
     }
 
     private String getDate(){
         return new SimpleDateFormat("y年M月d日").format(new Date());
     }
 
-    private String getWeedDay(){
+    public String getWeedDay(){
         return new SimpleDateFormat("EEEE").format(new Date());
     }
 
