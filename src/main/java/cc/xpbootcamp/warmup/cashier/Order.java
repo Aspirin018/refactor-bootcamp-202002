@@ -6,9 +6,9 @@ import java.util.List;
 public class Order {
     private static final String WEDNESDAY = "星期三";
 
-    String cName;
-    String addr;
-    List<LineItem> lineItemList;
+    private String cName;
+    private String addr;
+    private List<LineItem> lineItemList;
 
     public Order(String cName, String addr, List<LineItem> lineItemList) {
         this.cName = cName;
