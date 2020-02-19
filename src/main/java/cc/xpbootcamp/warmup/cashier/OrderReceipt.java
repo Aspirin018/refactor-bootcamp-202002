@@ -17,7 +17,6 @@ public class OrderReceipt {
     private static final String TAX = "税额: ";
     private static final String DISCOUNT = "折扣: ";
     private static final String TOTAL_AMOUNT = "总价: ";
-    private static final String WEDNESDAY = "星期三";
 
     private Order order;
 
