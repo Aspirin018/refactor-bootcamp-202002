@@ -46,7 +46,7 @@ class OrderReceiptTest {
     }
 
     @Test
-    void shouldPrintTotalAmountWithoutDiscountWhenIsWednesday() {
+    void shouldPrintTotalAmountWithoutDiscountWhenIsNotWednesday() {
         String output = receipt.printReceipt();
 
         if(!"星期三".equals(DateUtil.getWeedDay())) {
