@@ -1,5 +1,6 @@
 package cc.xpbootcamp.warmup.cashier;
 
+import cc.xpbootcamp.warmup.cashier.utils.DateUtil;
 import java.util.List;
 
 public class Order {
@@ -43,10 +44,7 @@ public class Order {
         return result;
     }
 
-    double getDiscount(String weekDay){
-        if(WEDNESDAY.equals(weekDay)) {
-            return getTotalAmount() - getTotalAmount() * 0.98;
-        }
-        return 0d;
+    double getDiscount(){
+        return WEDNESDAY.equals(DateUtil.getWeedDay()) ? getTotalAmount() - getTotalAmount() * 0.98 : 0d;
     }
 }

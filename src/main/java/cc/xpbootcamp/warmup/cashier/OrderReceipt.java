@@ -1,8 +1,7 @@
 package cc.xpbootcamp.warmup.cashier;
 
+import cc.xpbootcamp.warmup.cashier.utils.DateUtil;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * OrderReceipt prints the details of order including customer name, address, description, quantity,
@@ -29,15 +28,15 @@ public class OrderReceipt {
 
         output.append(generateDateLine());
 
-        output.append(generateDetailLines() + "\n");
+        output.append(generateDetailLines()).append("\n");
 
         output.append(generateFooterLines());
 
         return output.toString();
     }
 
-    private String generateDateLine(){
-        return getDate() + "," + getWeedDay() + "\n\n";
+    private String generateDateLine() {
+        return DateUtil.getFormattedDate() + "," + DateUtil.getWeedDay() + "\n\n";
     }
 
     private String generateDetailLines() {
@@ -55,29 +54,20 @@ public class OrderReceipt {
         return getTotalTaxLine() + "\n" +  getDiscountLine() + getTotalAmountLine() + "\n";
     }
 
-    private String getTotalTaxLine(){
+    private String getTotalTaxLine() {
         return TAX + setDecimal(order.getTotalSalesTax());
     }
 
-    private String getDiscountLine(){
-        double discount = order.getDiscount(getWeedDay());
-        return discount > 0 ? DISCOUNT + setDecimal(discount) + "\n" : "";
+    private String getDiscountLine() {
+        return order.getDiscount() > 0 ? DISCOUNT + setDecimal(order.getDiscount()) + "\n" : "";
     }
 
-    private String getTotalAmountLine(){
-        double discount = order.getDiscount(getWeedDay());
-        return discount > 0 ? TOTAL_AMOUNT + setDecimal(order.getTotalAmount() - discount) : setDecimal(order.getTotalAmount());
+    private String getTotalAmountLine() {
+        return order.getDiscount() > 0 ? TOTAL_AMOUNT + setDecimal(order.getTotalAmount()
+                - order.getDiscount()) : setDecimal(order.getTotalAmount());
     }
 
-    private String getDate(){
-        return new SimpleDateFormat("y年M月d日").format(new Date());
-    }
-
-    public String getWeedDay(){
-        return new SimpleDateFormat("EEEE").format(new Date());
-    }
-
-    private String setDecimal(double value){
+    private String setDecimal(double value) {
         DecimalFormat decimalFormat = new DecimalFormat("#.00");
         return decimalFormat.format(value);
     }

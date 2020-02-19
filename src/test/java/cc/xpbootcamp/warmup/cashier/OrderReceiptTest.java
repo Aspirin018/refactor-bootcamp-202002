@@ -1,5 +1,6 @@
 package cc.xpbootcamp.warmup.cashier;
 
+import cc.xpbootcamp.warmup.cashier.utils.DateUtil;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ class OrderReceiptTest {
     void shouldPrintDiscountAndTotalAmountWhenIsWednesday() {
         String output = receipt.printReceipt();
 
-        if("星期三".equals(receipt.getWeedDay())) {
+        if("星期三".equals(DateUtil.getWeedDay())) {
             assertThat(output, containsString("折扣: 1.17"));
             assertThat(output, containsString("总价: 57.13"));
         }
@@ -48,7 +49,7 @@ class OrderReceiptTest {
     void shouldPrintTotalAmountWithoutDiscountWhenIsWednesday() {
         String output = receipt.printReceipt();
 
-        if(!"星期三".equals(receipt.getWeedDay())) {
+        if(!"星期三".equals(DateUtil.getWeedDay())) {
             Assert.assertFalse(output.contains("折扣: 1.17"));
             assertThat(output, containsString("总价: 58.30"));
         }
