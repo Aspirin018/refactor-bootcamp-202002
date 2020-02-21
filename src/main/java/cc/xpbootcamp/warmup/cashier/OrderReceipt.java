@@ -1,7 +1,6 @@
 package cc.xpbootcamp.warmup.cashier;
 
 import cc.xpbootcamp.warmup.cashier.utils.DateUtil;
-import java.text.DecimalFormat;
 
 /**
  * OrderReceipt prints the details of order including customer name, address, description, quantity,
@@ -30,7 +29,7 @@ public class OrderReceipt {
     public String printReceipt() {
         StringBuilder output = new StringBuilder();
 
-        output.append(generateHeaderLine());
+        output.append(generateHeaderLines());
 
         output.append(generateDetailLines());
 
@@ -39,7 +38,7 @@ public class OrderReceipt {
         return output.toString();
     }
 
-    private String generateHeaderLine() {
+    private String generateHeaderLines() {
         return TITLE + String.format(DATE_FORMATTER, DateUtil.getFormattedDate(order.getCurrentDay()),
                 DateUtil.getWeekDay(order.getCurrentDay()));
     }
@@ -54,19 +53,19 @@ public class OrderReceipt {
     }
 
     private String generateFooterLines() {
-        return DIVIDING_LINE + getTotalTaxLine() + getDiscountLine() + getTotalAmountLine();
+        return DIVIDING_LINE + buildTotalTaxLine() + buildDiscountLine() + buildTotalAmountLine();
     }
 
-    private String getTotalTaxLine() {
-        return String.format(FOOTER_FORMATTER, TAX, order.getTotalSalesTax());
+    private String buildTotalTaxLine() {
+        return String.format(FOOTER_FORMATTER, TAX, order.calculateTotalSalesTax());
     }
 
-    private String getDiscountLine() {
-        return order.getDiscount() > 0 ?  String.format(FOOTER_FORMATTER, DISCOUNT, order.getDiscount()) : "";
+    private String buildDiscountLine() {
+        return order.calculateDiscount() > 0 ?  String.format(FOOTER_FORMATTER, DISCOUNT, order.calculateDiscount()) : "";
     }
 
-    private String getTotalAmountLine() {
-        return String.format(FOOTER_FORMATTER, TOTAL_AMOUNT, order.getTotalAmount());
+    private String buildTotalAmountLine() {
+        return String.format(FOOTER_FORMATTER, TOTAL_AMOUNT, order.calculateTotalAmount());
     }
 
 }
