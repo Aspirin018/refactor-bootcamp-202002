@@ -2,7 +2,6 @@ package cc.xpbootcamp.warmup.cashier;
 
 import cc.xpbootcamp.warmup.cashier.utils.DateUtil;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -45,7 +44,11 @@ public class Order {
         return result;
     }
 
-    double getTotalAmount(){
+    double getTotalAmount() {
+        return getDiscount() > 0 ? getFullTotalAmount() - getDiscount() : getFullTotalAmount();
+    }
+
+    double getFullTotalAmount(){
         double result = 0d;
         for(LineItem lineItem : getLineItems()) {
             result += lineItem.amount() + lineItem.getItemSaleTax();
@@ -54,6 +57,6 @@ public class Order {
     }
 
     double getDiscount(){
-        return WEDNESDAY.equals(DateUtil.getWeedDay(getCurrentDay())) ? getTotalAmount() - getTotalAmount() * 0.98 : 0d;
+        return WEDNESDAY.equals(DateUtil.getWeedDay(getCurrentDay())) ? getFullTotalAmount() - getFullTotalAmount() * 0.98 : 0d;
     }
 }

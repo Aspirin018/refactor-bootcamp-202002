@@ -12,7 +12,10 @@ import java.text.DecimalFormat;
  */
 public class OrderReceipt {
 
-    private static final String TITLE = "====老王超市，值得信赖====";
+    private static final String TITLE = "====老王超市，值得信赖====\n\n";
+    private static final String DATE_FORMATTER = "%s,%s\n\n";
+    private static final String LINE_ITEM_FORMATTER = "%s, %s x %d, %s\n";
+    private static final String FOOTER_FORMATTER = "\n%s\n%s%s\n";
     private static final String TAX = "税额: ";
     private static final String DISCOUNT = "折扣: ";
     private static final String TOTAL_AMOUNT = "总价: ";
@@ -24,9 +27,9 @@ public class OrderReceipt {
     }
 
     public String printReceipt() {
-        StringBuilder output = new StringBuilder(TITLE + "\n\n");
+        StringBuilder output = new StringBuilder();
 
-        output.append(generateDateLine());
+        output.append(generateHeaderLine());
 
         output.append(generateDetailLines()).append("\n");
 
@@ -35,23 +38,22 @@ public class OrderReceipt {
         return output.toString();
     }
 
-    private String generateDateLine() {
-        return DateUtil.getFormattedDate(order.getCurrentDay()) + "," + DateUtil.getWeedDay(order.getCurrentDay()) + "\n\n";
+    private String generateHeaderLine() {
+        return TITLE + String.format(DATE_FORMATTER, DateUtil.getFormattedDate(order.getCurrentDay()),
+                DateUtil.getWeedDay(order.getCurrentDay()));
     }
 
     private String generateDetailLines() {
         StringBuilder result = new StringBuilder();
         for(LineItem item : order.getLineItems()){
-            result.append(item.getDescription()).append(", ");
-            result.append(setDecimal(item.getPrice())).append(" x ");
-            result.append(item.getQuantity()).append(", ");
-            result.append(setDecimal(item.amount())).append("\n");
+            result.append(String.format(LINE_ITEM_FORMATTER, item.getDescription(), setDecimal(item.getPrice()),
+                    item.getQuantity(), setDecimal(item.amount())));
         }
         return result.toString();
     }
 
     private String generateFooterLines() {
-        return getTotalTaxLine() + "\n" +  getDiscountLine() + getTotalAmountLine() + "\n";
+        return String.format(FOOTER_FORMATTER, getTotalTaxLine(), getDiscountLine(), getTotalAmountLine());
     }
 
     private String getTotalTaxLine() {
@@ -63,8 +65,7 @@ public class OrderReceipt {
     }
 
     private String getTotalAmountLine() {
-        return TOTAL_AMOUNT + (order.getDiscount() > 0 ? setDecimal(order.getTotalAmount()
-                - order.getDiscount()) : setDecimal(order.getTotalAmount()));
+        return TOTAL_AMOUNT +setDecimal(order.getTotalAmount());
     }
 
     private String setDecimal(double value) {

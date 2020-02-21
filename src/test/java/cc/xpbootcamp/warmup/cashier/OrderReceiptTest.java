@@ -48,6 +48,7 @@ class OrderReceiptTest {
         OrderReceipt receipt = new OrderReceipt(order);
         String output = receipt.printReceipt();
 
+        assertThat(output, containsString("2020年2月19日,星期三"));
         assertThat(output, containsString("折扣: 1.17"));
         assertThat(output, containsString("总价: 57.13"));
     }
@@ -57,10 +58,11 @@ class OrderReceiptTest {
         Order order = spy(new Order(null, null, lineItems));
         when(order.getCurrentDay()).thenReturn(new SimpleDateFormat("yyyy-MM-dd").parse("2020-02-18"));
 
-        OrderReceipt receipt = new OrderReceipt(new Order(null, null, lineItems));
+        OrderReceipt receipt = new OrderReceipt(order);
         String output = receipt.printReceipt();
 
         Assert.assertFalse(output.contains("折扣: 1.17"));
+        assertThat(output, containsString("2020年2月18日,星期二"));
         assertThat(output, containsString("总价: 58.30"));
     }
 
