@@ -57,6 +57,6 @@ public class Order {
     }
 
     double getDiscount(){
-        return WEDNESDAY.equals(DateUtil.getWeedDay(getCurrentDay())) ? getFullTotalAmount() - getFullTotalAmount() * 0.98 : 0d;
+        return WEDNESDAY.equals(DateUtil.getWeekDay(getCurrentDay())) ? getFullTotalAmount() - getFullTotalAmount() * 0.98 : 0d;
     }
 }

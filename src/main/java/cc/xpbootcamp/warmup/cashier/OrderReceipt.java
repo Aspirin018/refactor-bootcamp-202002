@@ -40,7 +40,7 @@ public class OrderReceipt {
 
     private String generateHeaderLine() {
         return TITLE + String.format(DATE_FORMATTER, DateUtil.getFormattedDate(order.getCurrentDay()),
-                DateUtil.getWeedDay(order.getCurrentDay()));
+                DateUtil.getWeekDay(order.getCurrentDay()));
     }
 
     private String generateDetailLines() {

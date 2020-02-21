@@ -11,7 +11,7 @@ public final class DateUtil {
         return new SimpleDateFormat("y年M月d日").format(date);
     }
 
-    public static String getWeedDay(Date date){
+    public static String getWeekDay(Date date){
         return new SimpleDateFormat("EEEE").format(date);
     }
 
