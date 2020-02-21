@@ -32,12 +32,13 @@ class OrderReceiptTest {
     }
 
     @Test
-    void shouldPrintTitle() {
+    void shouldPrintTitleAndDividingLine() {
         OrderReceipt receipt = new OrderReceipt(new Order(null, null, lineItems));
 
         String output = receipt.printReceipt();
 
         assertThat(output, containsString("====老王超市，值得信赖===="));
+        assertThat(output, containsString("------------------------"));
     }
 
     @Test
@@ -61,7 +62,7 @@ class OrderReceiptTest {
         OrderReceipt receipt = new OrderReceipt(order);
         String output = receipt.printReceipt();
 
-        Assert.assertFalse(output.contains("折扣: 1.17"));
+        Assert.assertFalse(output.contains("折扣"));
         assertThat(output, containsString("2020年2月18日,星期二"));
         assertThat(output, containsString("总价: 58.30"));
     }

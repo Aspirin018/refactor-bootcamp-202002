@@ -15,6 +15,7 @@ public class OrderReceipt {
     private static final String TITLE = "====老王超市，值得信赖====\n\n";
     private static final String DATE_FORMATTER = "%s,%s\n\n";
     private static final String LINE_ITEM_FORMATTER = "%s, %.2f x %d, %.2f\n";
+    private static final String DIVIDING_LINE = "------------------------\n";
     private static final String FOOTER_FORMATTER = "%s: %.2f\n";
     private static final String TAX = "税额";
     private static final String DISCOUNT = "折扣";
@@ -31,7 +32,7 @@ public class OrderReceipt {
 
         output.append(generateHeaderLine());
 
-        output.append(generateDetailLines()).append("\n");
+        output.append(generateDetailLines());
 
         output.append(generateFooterLines());
 
@@ -53,7 +54,7 @@ public class OrderReceipt {
     }
 
     private String generateFooterLines() {
-        return getTotalTaxLine() + getDiscountLine() + getTotalAmountLine();
+        return DIVIDING_LINE + getTotalTaxLine() + getDiscountLine() + getTotalAmountLine();
     }
 
     private String getTotalTaxLine() {
