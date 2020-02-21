@@ -7,12 +7,12 @@ public final class DateUtil {
 
     DateUtil() {}
 
-    public static String getFormattedDate(){
-        return new SimpleDateFormat("y年M月d日").format(new Date());
+    public static String getFormattedDate(Date date){
+        return new SimpleDateFormat("y年M月d日").format(date);
     }
 
-    public static String getWeedDay(){
-        return new SimpleDateFormat("EEEE").format(new Date());
+    public static String getWeedDay(Date date){
+        return new SimpleDateFormat("EEEE").format(date);
     }
 
 }

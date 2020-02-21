@@ -36,7 +36,7 @@ public class OrderReceipt {
     }
 
     private String generateDateLine() {
-        return DateUtil.getFormattedDate() + "," + DateUtil.getWeedDay() + "\n\n";
+        return DateUtil.getFormattedDate(order.getCurrentDay()) + "," + DateUtil.getWeedDay(order.getCurrentDay()) + "\n\n";
     }
 
     private String generateDetailLines() {
@@ -63,8 +63,8 @@ public class OrderReceipt {
     }
 
     private String getTotalAmountLine() {
-        return order.getDiscount() > 0 ? TOTAL_AMOUNT + setDecimal(order.getTotalAmount()
-                - order.getDiscount()) : setDecimal(order.getTotalAmount());
+        return TOTAL_AMOUNT + (order.getDiscount() > 0 ? setDecimal(order.getTotalAmount()
+                - order.getDiscount()) : setDecimal(order.getTotalAmount()));
     }
 
     private String setDecimal(double value) {

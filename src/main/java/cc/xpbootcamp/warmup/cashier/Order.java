@@ -1,6 +1,9 @@
 package cc.xpbootcamp.warmup.cashier;
 
 import cc.xpbootcamp.warmup.cashier.utils.DateUtil;
+
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class Order {
@@ -9,11 +12,17 @@ public class Order {
     private String cName;
     private String addr;
     private List<LineItem> lineItemList;
+    private Date currentDay;
 
     public Order(String cName, String addr, List<LineItem> lineItemList) {
         this.cName = cName;
         this.addr = addr;
         this.lineItemList = lineItemList;
+        this.currentDay = new Date();
+    }
+
+    Date getCurrentDay() {
+        return this.currentDay;
     }
 
     String getCustomerName() {
@@ -45,6 +54,6 @@ public class Order {
     }
 
     double getDiscount(){
-        return WEDNESDAY.equals(DateUtil.getWeedDay()) ? getTotalAmount() - getTotalAmount() * 0.98 : 0d;
+        return WEDNESDAY.equals(DateUtil.getWeedDay(getCurrentDay())) ? getTotalAmount() - getTotalAmount() * 0.98 : 0d;
     }
 }
