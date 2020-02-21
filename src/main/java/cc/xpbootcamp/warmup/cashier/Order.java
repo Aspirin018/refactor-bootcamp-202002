@@ -48,7 +48,7 @@ public class Order {
         return getDiscount() > 0 ? getFullTotalAmount() - getDiscount() : getFullTotalAmount();
     }
 
-    double getFullTotalAmount(){
+    private double getFullTotalAmount(){
         double result = 0d;
         for(LineItem lineItem : getLineItems()) {
             result += lineItem.amount() + lineItem.getItemSaleTax();
