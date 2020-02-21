@@ -14,11 +14,11 @@ public class OrderReceipt {
 
     private static final String TITLE = "====老王超市，值得信赖====\n\n";
     private static final String DATE_FORMATTER = "%s,%s\n\n";
-    private static final String LINE_ITEM_FORMATTER = "%s, %s x %d, %s\n";
-    private static final String FOOTER_FORMATTER = "\n%s\n%s%s\n";
-    private static final String TAX = "税额: ";
-    private static final String DISCOUNT = "折扣: ";
-    private static final String TOTAL_AMOUNT = "总价: ";
+    private static final String LINE_ITEM_FORMATTER = "%s, %.2f x %d, %.2f\n";
+    private static final String FOOTER_FORMATTER = "%s: %.2f\n";
+    private static final String TAX = "税额";
+    private static final String DISCOUNT = "折扣";
+    private static final String TOTAL_AMOUNT = "总价";
 
     private Order order;
 
@@ -46,31 +46,26 @@ public class OrderReceipt {
     private String generateDetailLines() {
         StringBuilder result = new StringBuilder();
         for(LineItem item : order.getLineItems()){
-            result.append(String.format(LINE_ITEM_FORMATTER, item.getDescription(), setDecimal(item.getPrice()),
-                    item.getQuantity(), setDecimal(item.amount())));
+            result.append(String.format(LINE_ITEM_FORMATTER, item.getDescription(), item.getPrice(),
+                    item.getQuantity(), item.amount()));
         }
         return result.toString();
     }
 
     private String generateFooterLines() {
-        return String.format(FOOTER_FORMATTER, getTotalTaxLine(), getDiscountLine(), getTotalAmountLine());
+        return getTotalTaxLine() + getDiscountLine() + getTotalAmountLine();
     }
 
     private String getTotalTaxLine() {
-        return TAX + setDecimal(order.getTotalSalesTax());
+        return String.format(FOOTER_FORMATTER, TAX, order.getTotalSalesTax());
     }
 
     private String getDiscountLine() {
-        return order.getDiscount() > 0 ? DISCOUNT + setDecimal(order.getDiscount()) + "\n" : "";
+        return order.getDiscount() > 0 ?  String.format(FOOTER_FORMATTER, DISCOUNT, order.getDiscount()) : "";
     }
 
     private String getTotalAmountLine() {
-        return TOTAL_AMOUNT +setDecimal(order.getTotalAmount());
-    }
-
-    private String setDecimal(double value) {
-        DecimalFormat decimalFormat = new DecimalFormat("#.00");
-        return decimalFormat.format(value);
+        return String.format(FOOTER_FORMATTER, TOTAL_AMOUNT, order.getTotalAmount());
     }
 
 }
