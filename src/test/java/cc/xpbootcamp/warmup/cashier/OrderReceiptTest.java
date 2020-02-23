@@ -21,7 +21,7 @@ class OrderReceiptTest {
 
 
     @Test
-    public void shouldPrintLineItemAndSalesTaxInformation() {
+    void shouldPrintLineItemAndSalesTaxInformation() {
         OrderReceipt receipt = new OrderReceipt(new Order(null, null, lineItems));
 
         String output = receipt.printReceipt();
