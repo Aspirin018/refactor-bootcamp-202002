@@ -7,7 +7,6 @@ import cc.xpbootcamp.warmup.cashier.utils.DateUtil;
  * price and amount. It also calculates the sales tax @ 10% and prints as part
  * of order. It computes the total order amount (amount of individual lineItems +
  * total sales tax) and prints it.
- *
  */
 public class OrderReceipt {
 
@@ -29,30 +28,30 @@ public class OrderReceipt {
     public String printReceipt() {
         StringBuilder output = new StringBuilder();
 
-        output.append(generateHeaderLines());
+        output.append(generateReceiptHeaderLines());
 
-        output.append(generateDetailLines());
+        output.append(generateSalesDetailLines());
 
-        output.append(generateFooterLines());
+        output.append(generateSalesSummaryLines());
 
         return output.toString();
     }
 
-    private String generateHeaderLines() {
+    private String generateReceiptHeaderLines() {
         return TITLE + String.format(DATE_FORMATTER, DateUtil.getFormattedDate(order.getCurrentDay()),
                 DateUtil.getWeekDay(order.getCurrentDay()));
     }
 
-    private String generateDetailLines() {
+    private String generateSalesDetailLines() {
         StringBuilder result = new StringBuilder();
-        for(LineItem item : order.getLineItems()){
+        for (LineItem item : order.getLineItems()) {
             result.append(String.format(LINE_ITEM_FORMATTER, item.getDescription(), item.getPrice(),
                     item.getQuantity(), item.amount()));
         }
         return result.toString();
     }
 
-    private String generateFooterLines() {
+    private String generateSalesSummaryLines() {
         return DIVIDING_LINE + buildTotalTaxLine() + buildDiscountLine() + buildTotalAmountLine();
     }
 
@@ -61,7 +60,7 @@ public class OrderReceipt {
     }
 
     private String buildDiscountLine() {
-        return order.calculateDiscount() > 0 ?  String.format(FOOTER_FORMATTER, DISCOUNT, order.calculateDiscount()) : "";
+        return order.calculateDiscount() > 0 ? String.format(FOOTER_FORMATTER, DISCOUNT, order.calculateDiscount()) : "";
     }
 
     private String buildTotalAmountLine() {

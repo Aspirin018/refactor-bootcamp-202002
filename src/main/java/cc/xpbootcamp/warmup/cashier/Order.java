@@ -36,9 +36,9 @@ public class Order {
         return lineItemList;
     }
 
-    double calculateTotalSalesTax(){
+    double calculateTotalSalesTax() {
         double result = 0d;
-        for(LineItem lineItem : getLineItems()) {
+        for (LineItem lineItem : getLineItems()) {
             result += lineItem.getItemSaleTax();
         }
         return result;
@@ -48,15 +48,15 @@ public class Order {
         return calculateDiscount() > 0 ? calculateFullTotalAmount() - calculateDiscount() : calculateFullTotalAmount();
     }
 
-    private double calculateFullTotalAmount(){
+    private double calculateFullTotalAmount() {
         double result = 0d;
-        for(LineItem lineItem : getLineItems()) {
+        for (LineItem lineItem : getLineItems()) {
             result += lineItem.amount() + lineItem.getItemSaleTax();
         }
         return result;
     }
 
-    double calculateDiscount(){
+    double calculateDiscount() {
         return WEDNESDAY.equals(DateUtil.getWeekDay(getCurrentDay())) ?
                 calculateFullTotalAmount() - calculateFullTotalAmount() * 0.98 : 0d;
     }
